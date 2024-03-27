@@ -1,4 +1,5 @@
 import mido
+import mido.backends.rtmidi
 
 # ports 'Neutron(1):Neutron(1) MIDI 1 xx:0'
 def ls_ports():

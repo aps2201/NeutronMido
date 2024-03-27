@@ -143,109 +143,109 @@ def device_select():
     neutron_port_in = port_in(device_combo.currentText())
     print(neutron_port_out,"\n",neutron_port_in)
 
-# Application Start
-app = QApplication(sys.argv)
-app.setApplicationName = "Neutron MIDO"
-version = QLabel()
-version.setAlignment(Qt.AlignCenter)
 
-device_layout = QHBoxLayout()
-device_label = QLabel("Device")
-device_combo = QComboBox()
-device_refresh()
-device_combo.addItems(ports_list)
-device_btn = QPushButton("Refresh Devices")
-device_combo.currentTextChanged.connect(device_select)
-device_btn.clicked.connect(device_refresh)
-device_layout.addWidget(device_label, 1)
-device_layout.addWidget(device_combo, 1)
-device_layout.addWidget(device_btn, 1)
-device_widget = QWidget()
-device_widget.setLayout(device_layout)
-
-version_check = QPushButton("Check Version")
-version_check.clicked.connect(ver)
-
-reset_btn = QPushButton("Reset")
-reset_btn.clicked.connect(restore)
-
-# OSC SECTION
-osc_title = QLabel("OSCILLATOR")
-
-osc1_bypass_chk = QCheckBox("OSC 1 Tune Pot Bypass")
-osc1_bypass_chk.stateChanged.connect(bypass1)
-
-osc2_bypass_chk = QCheckBox("OSC 2 Tune Pot Bypass")
-osc2_bypass_chk.stateChanged.connect(bypass2)
-
-paraphonic_chk = QCheckBox("PARAPHONIC")
-paraphonic_chk.stateChanged.connect(paraphonic)
-
-sync_chk = QCheckBox("SYNC")
-sync_chk.stateChanged.connect(sync)
-
-key_split_layout = QHBoxLayout()
-key_split_label = QLabel("Key Split")
-key_split_combo = QComboBox()
-key_split_combo.addItems(list(midi_table.keys()))
-key_split_combo.setCurrentText("OFF")
-key_split_combo.currentTextChanged.connect(keysplit)
-key_split_layout.addWidget(key_split_label, 1)
-key_split_layout.addWidget(key_split_combo, 1)
-key_split_widget = QWidget()
-key_split_widget.setLayout(key_split_layout)
-
-autoglide_layout = QHBoxLayout()
-
-autoglide1_label = QLabel("Autoglide OSC1")
-autoglide1_label.setAlignment(Qt.AlignLeft)
-autoglide1_combo = QComboBox()
-autoglide1_combo.addItems(list(semitone_table.keys()))
-autoglide1_combo.setCurrentText("0")
-autoglide1_combo.currentTextChanged.connect(autoglide1)
-
-autoglide2_label = QLabel("Autoglide OSC2")
-autoglide2_label.setAlignment(Qt.AlignRight)
-autoglide2_combo = QComboBox()
-autoglide2_combo.addItems(list(semitone_table.keys()))
-autoglide2_combo.setCurrentText("0")
-autoglide2_combo.currentTextChanged.connect(autoglide2)
-
-autoglide_layout.addWidget(autoglide1_combo, 1)
-autoglide_layout.addWidget(autoglide1_label, 1)
-autoglide_layout.addWidget(autoglide2_label, 1)
-autoglide_layout.addWidget(autoglide2_combo, 1)
-autoglide_widget = QWidget()
-autoglide_widget.setLayout(autoglide_layout)
-
-# LFO SECTION
-lfo_title = QLabel("LFO")
-
-blend_lfo_chk = QCheckBox("LFO Blend")
-blend_lfo_chk.stateChanged.connect(blend_lfo)
-
-keysync_lfo_chk = QCheckBox("LFO Key Sync")
-keysync_lfo_chk.stateChanged.connect(keysync_lfo)
-
-oneshot_lfo_chk = QCheckBox("LFO One Shot")
-oneshot_lfo_chk.stateChanged.connect(oneshot_lfo)
-
-clocksync_lfo_chk = QCheckBox("LFO MIDI Clock Sync")
-clocksync_lfo_chk.stateChanged.connect(clocksync_lfo)
-
-# Conditions
-if not paraphonic_chk.isChecked():
-    key_split_widget.setVisible(False)
-
-
-if not keysync_lfo_chk.isChecked():
-    oneshot_lfo_chk.setVisible(False)
 
 
 class Widget(QWidget):
     def __init__(self, parent=None):
         super(Widget, self).__init__(parent)
         main_layout = QGridLayout()
+
+        # Widgets
+        version = QLabel()
+        version.setAlignment(Qt.AlignCenter)
+
+        device_layout = QHBoxLayout()
+        device_label = QLabel("Device")
+        device_combo = QComboBox()
+        device_refresh()
+        device_combo.addItems(ports_list)
+        device_btn = QPushButton("Refresh Devices")
+        device_combo.currentTextChanged.connect(device_select)
+        device_btn.clicked.connect(device_refresh)
+        device_layout.addWidget(device_label, 1)
+        device_layout.addWidget(device_combo, 1)
+        device_layout.addWidget(device_btn, 1)
+        device_widget = QWidget()
+        device_widget.setLayout(device_layout)
+
+        version_check = QPushButton("Check Version")
+        version_check.clicked.connect(ver)
+
+        reset_btn = QPushButton("Reset")
+        reset_btn.clicked.connect(restore)
+
+        # OSC SECTION
+        osc_title = QLabel("OSCILLATOR")
+
+        osc1_bypass_chk = QCheckBox("OSC 1 Tune Pot Bypass")
+        osc1_bypass_chk.stateChanged.connect(bypass1)
+
+        osc2_bypass_chk = QCheckBox("OSC 2 Tune Pot Bypass")
+        osc2_bypass_chk.stateChanged.connect(bypass2)
+
+        paraphonic_chk = QCheckBox("PARAPHONIC")
+        paraphonic_chk.stateChanged.connect(paraphonic)
+
+        sync_chk = QCheckBox("SYNC")
+        sync_chk.stateChanged.connect(sync)
+
+        key_split_layout = QHBoxLayout()
+        key_split_label = QLabel("Key Split")
+        key_split_combo = QComboBox()
+        key_split_combo.addItems(list(midi_table.keys()))
+        key_split_combo.setCurrentText("OFF")
+        key_split_combo.currentTextChanged.connect(keysplit)
+        key_split_layout.addWidget(key_split_label, 1)
+        key_split_layout.addWidget(key_split_combo, 1)
+        key_split_widget = QWidget()
+        key_split_widget.setLayout(key_split_layout)
+
+        autoglide_layout = QHBoxLayout()
+
+        autoglide1_label = QLabel("Autoglide OSC1")
+        autoglide1_label.setAlignment(Qt.AlignLeft)
+        autoglide1_combo = QComboBox()
+        autoglide1_combo.addItems(list(semitone_table.keys()))
+        autoglide1_combo.setCurrentText("0")
+        autoglide1_combo.currentTextChanged.connect(autoglide1)
+
+        autoglide2_label = QLabel("Autoglide OSC2")
+        autoglide2_label.setAlignment(Qt.AlignRight)
+        autoglide2_combo = QComboBox()
+        autoglide2_combo.addItems(list(semitone_table.keys()))
+        autoglide2_combo.setCurrentText("0")
+        autoglide2_combo.currentTextChanged.connect(autoglide2)
+
+        autoglide_layout.addWidget(autoglide1_combo, 1)
+        autoglide_layout.addWidget(autoglide1_label, 1)
+        autoglide_layout.addWidget(autoglide2_label, 1)
+        autoglide_layout.addWidget(autoglide2_combo, 1)
+        autoglide_widget = QWidget()
+        autoglide_widget.setLayout(autoglide_layout)
+
+        # LFO SECTION
+        lfo_title = QLabel("LFO")
+
+        blend_lfo_chk = QCheckBox("LFO Blend")
+        blend_lfo_chk.stateChanged.connect(blend_lfo)
+
+        keysync_lfo_chk = QCheckBox("LFO Key Sync")
+        keysync_lfo_chk.stateChanged.connect(keysync_lfo)
+
+        oneshot_lfo_chk = QCheckBox("LFO One Shot")
+        oneshot_lfo_chk.stateChanged.connect(oneshot_lfo)
+
+        clocksync_lfo_chk = QCheckBox("LFO MIDI Clock Sync")
+        clocksync_lfo_chk.stateChanged.connect(clocksync_lfo)
+
+        # Conditions
+        if not paraphonic_chk.isChecked():
+            key_split_widget.setVisible(False)
+
+
+        if not keysync_lfo_chk.isChecked():
+            oneshot_lfo_chk.setVisible(False)
 
         layout = QVBoxLayout()
         # layout.addWidget()
