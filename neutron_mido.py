@@ -19,9 +19,9 @@ def port_in(port):
     return neutron_port_in
 
 
-# functions
-def sysex(hex):
-    hex=hex
+# Functions
+def sysex(hex): # translates SysEx hex to midi values
+    hex = hex
     hex_ls = hex.split(" ")
     sysex = []
     for n in hex_ls:
@@ -29,7 +29,7 @@ def sysex(hex):
     return sysex
 
 
-def sysex_msg(sysex):
+def sysex_msg(sysex): # sends midi values
     m = mido.Message('sysex', data=sysex)
     neutron_port_out.send(m)
     return m
