@@ -1,12 +1,13 @@
 # Behringer Neutron Cross Platform App
 
 A _potentially_ cross platform app for the Behringer Neutron. Ideally this would be a drop in of the official app,
-however as you can see it is just bare bones mostly. This was built in Python:3.11 based on [Mido](https://mido.readthedocs.io/en/stable/)
+however as you can see it is just bare bones mostly. This was built in Python:3.13.2 based on [Mido](https://mido.readthedocs.io/en/stable/)
 with the [RTMidi](https://pypi.org/project/python-rtmidi/) backend. The GUI is Qt by way of [PySide6](https://doc.qt.io/qtforpython-6/).
-The release only has a Linux binary but the pyside6-deploy command can [create a binary in Linux, Windows, or Mac](https://doc.qt.io/qtforpython-6/deployment/index.html).
+The release only has a Linux binary but the `pyside6-deploy neutron_qt.py --name NeutronMido` command can potentially [create a NeutronMido binary in Linux, Windows, or Mac](https://doc.qt.io/qtforpython-6/deployment/index.html).
 
 The `sysex()` and `sysex_msg()` does most of the heavy lifting since mido communicates in midi values while the commands
 are in hex. Here is a simple format on sending messages to the device.
+
 ```commandline
 msg = sysex([SysEx_Command])
 sysex_msg(msg)
